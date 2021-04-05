@@ -47,10 +47,19 @@ Ethereum$Date <- dmy(Ethereum$Date)
 str(Ethereum)
 head(Ethereum)
 
+qplot(Date, Close, data = Ethereum, main = "Etherium Closing Price 2015 - 2020")
+
+# In order to see the patterns when the values are low or high we can do a log transformation 
 # Log transformation
-ds <- Ethereum $Date
+ds <- Ethereum$Date
 y <- log(Ethereum $Close)
-df <- Ethereum.frame(ds, y)
+df <- data.frame(ds, y)
+
+
+qplot(ds, y, data = df, main = "Etherium Closing Price in log scale 2015 - 2020")
+# W are now Able to see patterns when values are very low 
+
+
 
 # Forecasting with Facebook's prophet package
 m <- prophet(df)
@@ -60,14 +69,24 @@ forecast <- predict(m, future)
 # Plot forecast
 plot(m, forecast)
 prophet_plot_components(m, forecast)
+dyplot.prophet(m,forecast)
+#for the price just take the exp 
+#Aug 13 2017 Actual: 5.7 , prediccted 5.64 
+exp(5.64)
+exp(5.7)
+# price predicted 281.4627 , Actual price 298.86
+
+
 
 # Model performance
 pred <- forecast$yhat[1:1544]
 actual <- m$history$y
 plot(actual, pred)
+abline(lm(pred~actual))
+summary(lm(pred~actual))
 
 x <- cross_validation(m, 365, units = 'days')
 performance_metrics(x, rolling_window = 0.1)
 plot_cross_validation_metric(x,
-                             metric = 'mae',
-                             rolling_window = 0.2)
+                             metric = 'rmse',
+                             rolling_window = 0.1)
