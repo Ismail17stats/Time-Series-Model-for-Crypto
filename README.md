@@ -1,3 +1,3 @@
 # Time-Series-Model-for-Crypto
 
-Description will be added later on
+Provides forecasting of cryptocurrency Ethereum and retail sales prices using time-series analysis with R.
