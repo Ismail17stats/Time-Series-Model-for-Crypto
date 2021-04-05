@@ -1,5 +1,8 @@
 getwd()
 
+# This first code helps us see how a simple TS of data is performed on retail sales 
+
+
 ##############################################################
 # This file loads the monthly retail sales per day.
 # This data has been adjusted for inflation. 
@@ -35,7 +38,7 @@ autoplot(Y)+
   ggtitle('Time Plot: Real US Retail Sales per Day')+
   ylab('Millions of 2017 dollars')
 
-# Data has a trong trend. Investigate Transformations 
+# Data has a strong trend. Investigate Transformations 
 
 # Take the first difference of the data to remove the trend
 
